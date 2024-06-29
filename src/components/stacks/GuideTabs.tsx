@@ -1,4 +1,3 @@
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Yesterday from '../screens/guide/Yesterday';
 import Today from '../screens/guide/Today';
 import Tomorrow from '../screens/guide/Tomorrow';
@@ -7,8 +6,6 @@ import { screenWidth } from '../../utils/sizes';
 import { getDateString } from '../../utils';
 import Tabs from '../ui/Tabs';
 import { useState } from 'react';
-
-const Tab = createMaterialTopTabNavigator();
 
 const data = [
   { title: 'Yesterday', date: getDateString(-1) },
