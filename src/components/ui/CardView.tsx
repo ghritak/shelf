@@ -70,7 +70,7 @@ const CardView = ({ item, index, currentTime, day }: CardViewProps) => {
               width: 1.5,
               height: 60,
               backgroundColor:
-                isPassed && nextItemPassed ? Colors.primary : 'gray',
+                isPassed && nextItemPassed ? Colors.primary : '#999',
             }}
           />
         )}
