@@ -28,8 +28,23 @@ const CardView = ({ item, index, currentTime, day }: CardViewProps) => {
   const [hours, minutes] = item.time.split(':').map(Number);
   itemDate.setHours(hours, minutes, 0, 0);
 
-  // Determine the color based on the comparison
+  // Determine if the item has passed
   const isPassed = currentTime > itemDate;
+
+  // Check if the next item has passed
+  let nextItemPassed = false;
+  if (index < data.length - 1) {
+    const nextItem = data[index + 1];
+    const nextItemDate = new Date(currentTime);
+    if (day === 'Yesterday') {
+      nextItemDate.setDate(currentDate.getDate() - 1);
+    } else if (day === 'Tomorrow') {
+      nextItemDate.setDate(currentDate.getDate() + 1);
+    }
+    const [nextHours, nextMinutes] = nextItem.time.split(':').map(Number);
+    nextItemDate.setHours(nextHours, nextMinutes, 0, 0);
+    nextItemPassed = currentTime > nextItemDate;
+  }
 
   return (
     <View style={style.cardView}>
@@ -54,7 +69,8 @@ const CardView = ({ item, index, currentTime, day }: CardViewProps) => {
             style={{
               width: 1.5,
               height: 60,
-              backgroundColor: isPassed ? Colors.primary : 'gray',
+              backgroundColor:
+                isPassed && nextItemPassed ? Colors.primary : 'gray',
             }}
           />
         )}
