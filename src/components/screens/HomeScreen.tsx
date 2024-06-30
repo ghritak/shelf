@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Button, Text, View } from 'react-native';
 import { styles } from '../../styles/styles';
 
 const HomeScreen = () => {

@@ -5,7 +5,7 @@ import { Colors } from '../../styles/Colors';
 import { data } from '../../constants/guideData';
 
 interface CardViewProps {
-  item: { name: string; content: string; time: string };
+  item: { name: string; content: string; time: string; icon: string };
   index: number;
   currentTime: Date;
   day: 'Today' | 'Yesterday' | 'Tomorrow';
@@ -81,7 +81,7 @@ const CardView = ({ item, index, currentTime, day }: CardViewProps) => {
       </View>
       <View style={style.weatherCont}>
         <View style={style.weather}>
-          <FontAwesome6 name='cloud-meatball' size={20} />
+          <FontAwesome6 name={item?.icon} color={Colors.primary} size={20} />
         </View>
       </View>
     </View>

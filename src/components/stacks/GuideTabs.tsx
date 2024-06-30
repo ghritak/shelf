@@ -1,11 +1,11 @@
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet } from 'react-native';
 import Yesterday from '../screens/guide/Yesterday';
 import Today from '../screens/guide/Today';
 import Tomorrow from '../screens/guide/Tomorrow';
-import { StyleSheet, Text, View } from 'react-native';
+import Tabs from '../ui/Tabs';
 import { screenWidth } from '../../utils/sizes';
 import { getDateString } from '../../utils';
-import Tabs from '../ui/Tabs';
-import { useState } from 'react';
 
 const data = [
   { title: 'Yesterday', date: getDateString(-1) },
@@ -13,8 +13,18 @@ const data = [
   { title: 'Tomorrow', date: getDateString(1) },
 ];
 
-const GuideTabs = () => {
-  const [activeTab, setActiveTab] = useState(data[0]);
+const GuideTabs = ({ initialTab }) => {
+  const [activeTab, setActiveTab] = useState(
+    data.find((tab) => tab.title === initialTab) || data[0]
+  );
+
+  useEffect(() => {
+    const tab = data.find((item) => item.title === initialTab);
+    if (tab) {
+      setActiveTab(tab);
+    }
+  }, [initialTab]);
+
   return (
     <View>
       <Tabs data={data} activeTab={activeTab} setActiveTab={setActiveTab} />

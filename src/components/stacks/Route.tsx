@@ -9,12 +9,28 @@ import { Colors } from '../../styles/Colors';
 import WalletScreen from '../screens/WalletScreen';
 import GuideScreen from '../screens/GuideScreen';
 import ChartScreen from '../screens/ChartScreen';
+import { Platform } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
 const Route = () => {
+  const tabBarStyle =
+    Platform.OS === 'android'
+      ? { height: 64, paddingTop: 6 }
+      : { paddingTop: 6 };
+
   return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: tabBarStyle,
+        tabBarLabelStyle: {
+          marginBottom: Platform.OS === 'android' ? 14 : -4,
+          fontWeight: 500,
+          fontSize: 11,
+        },
+      }}
+    >
       <Tab.Screen
         name='Home'
         component={HomeScreen}
@@ -53,6 +69,7 @@ const Route = () => {
             />
           ),
         }}
+        initialParams={{ screen: 'Today' }}
       />
       <Tab.Screen
         name='Chart'

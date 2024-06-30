@@ -3,20 +3,27 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { styles } from '../../styles/styles';
 import GuideTabs from '../stacks/GuideTabs';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+
+type GuideScreenRouteParams = {
+  screen?: 'Today' | 'Yesterday' | 'Tomorrow';
+};
 
 const GuideScreen = () => {
+  const navigation = useNavigation<any>();
+  const route = useRoute<RouteProp<{ params: GuideScreenRouteParams }>>();
   return (
     <View style={styles.container}>
       <View style={style.topView}>
         <View style={style.heading}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
             <Ionicons name='arrow-back' size={22} />
           </TouchableOpacity>
           <Text style={style.headerText}>Itinerary Form</Text>
         </View>
       </View>
       <View style={{ width: '100%', height: '80%' }}>
-        <GuideTabs />
+        <GuideTabs initialTab={route.params?.screen || 'Today'} />
       </View>
     </View>
   );
